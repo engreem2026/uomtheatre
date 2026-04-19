@@ -6,23 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('reservations', function (Blueprint $table) {
-            //
+            // اسم الضيف (للوفود)
+            $table->string('guest_name')->nullable()->after('type');
+            // رقم جوال الضيف (للوفود)
+            $table->string('guest_phone')->nullable()->after('guest_name');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('reservations', function (Blueprint $table) {
-            //
+            $table->dropColumn(['guest_name', 'guest_phone']);
         });
     }
 };
