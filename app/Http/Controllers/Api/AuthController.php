@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,12 +20,14 @@ class AuthController extends Controller
             'phone'    => 'nullable|string',
         ]);
 
+        $userRoleId = Role::where('name', Role::USER)->value('id');
+
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => $request->password,
             'phone'    => $request->phone,
-            'role_id'  => 6,
+            'role_id'  => $userRoleId,
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;

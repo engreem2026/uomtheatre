@@ -1,1 +1,0 @@
-<livewire:auth.login />
